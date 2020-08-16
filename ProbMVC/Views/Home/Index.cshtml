@@ -1,0 +1,8 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+}
+
+<h2>Examples of CRUD tables implemented with MVC:</h2>
+@Html.ActionLink("Employees CRUD table (simple)", "Index", "Employee", null, new { style = "font-size: 150%" })
+<br />
+@Html.ActionLink("Employees CRUD table with 'Removed' functionality, using Dapper and memory caching", "Index", "EmployeeSupportRemoved", null, new { style = "font-size: 150%" })

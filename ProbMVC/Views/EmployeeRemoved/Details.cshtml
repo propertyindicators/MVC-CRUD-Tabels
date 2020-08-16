@@ -1,0 +1,76 @@
+﻿@model ProbMVC.Models.EmployeeRemovedModel
+
+@{
+	ViewBag.Title = "Removed employees";
+}
+
+<h1>Removed employee</h1>
+<hr />
+
+@if (ViewBag.Error == null)
+{
+	<table>
+		<thead />
+		<tbody>
+			<tr>
+				<td>
+					<h3>
+						@Html.DisplayFor(model => model.Name)
+					</h3>
+				</td>
+				<td>
+					<input type="button" onclick="location.href='@Url.Action("Revert", new { id = Model.Id })'" value="Revert" class="btn btn-default" style="margin-left:2em" />
+					<input type="button" onclick="location.href='@Url.Action("Delete", new { id = Model.Id })'" value="Delete employee" class="btn btn-warning" style="margin-left:2em" />
+					<input type="button" onclick="location.href='@Url.Action("Index")'" value="Back to list" class="btn btn-default" style="margin-left:2em" />
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<hr />
+	<table>
+		<thead />
+		<tbody>
+			<tr>
+				<td>Position:</td>
+				<td>@Html.DisplayFor(model => model.Position)</td>
+			</tr>
+			<tr>
+				<td>Age:</td>
+				<td>@Html.DisplayFor(model => model.Age) years old</td>
+			</tr>
+			<tr>
+				<td>Started to work:</td>
+				<td>@Html.DisplayFor(model => model.StartDate)</td>
+			</tr>
+			<tr>
+				<td>Salary:</td>
+				<td>$@Html.DisplayFor(model => model.Salary)</td>
+			</tr>
+			<tr>
+				<td>Removed:</td>
+				<td>@Html.DisplayFor(model => model.RemovedDate)</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<style>
+		td:first-of-type {
+			text-align: right;
+			font-weight: bold
+		}
+
+		td:last-of-type {
+			padding-left: 1em
+		}
+	</style>
+}
+else
+{
+	<h2 class="text-danger">@ViewBag.Error</h2>
+	<p>
+		@Html.ActionLink("Go to removed employee list", "Index")
+	</p>
+}

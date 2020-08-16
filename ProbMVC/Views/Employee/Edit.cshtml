@@ -1,0 +1,83 @@
+﻿@model ProbMVC.Models.EmployeeModel
+
+@{
+	ViewBag.Title = "Employees";
+}
+
+@if (ViewBag.Error == null)
+{
+	string controllerName = ViewBag.ControllerName;
+	using (Html.BeginForm("Edit", controllerName, FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<h4>@ViewBag.Action</h4>
+			<hr />
+			@Html.HiddenFor(model => model.Id)
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", placeholder = "yyyy-MM-dd" })
+					@Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Save" class="btn btn-default" />
+					<input type="button" onclick="location.href='@Url.Action("Index", @ViewBag.ControllerName)'" value="Cancel" class="btn btn-default" style="margin-left:3em" />
+				</div>
+			</div>
+		</div>
+	}
+
+	if (!string.IsNullOrEmpty(ViewBag.Error))
+	{
+		<p class="text-danger">@ViewBag.Error</p>
+	}
+}
+else
+{
+	<h2 class="text-danger">@ViewBag.Error</h2>
+}
+
+@Styles.Render("~/Content/bootstrap-datepicker")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryValidate")
+@Scripts.Render("~/bundles/bootstrap-datepicker")
+@Scripts.Render("~/bundles/formwithdateinit")
